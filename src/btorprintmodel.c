@@ -296,7 +296,7 @@ print_fun_model_smt2 (Btor *btor, BtorNode *node, uint32_t base, FILE *file)
   if (assignment) /* get rid of compiler warning */
   {
     fprintf (file, "%6c", ' ');
-    tmp = btor_bv_new (btor->mm, assignment->width);
+    tmp = btor_bv_new (btor->mm, btor_bv_get_width (assignment));
     btor_dumpsmt_dump_const_value (btor, tmp, base, file);
     btor_bv_free (btor->mm, tmp);
   }
