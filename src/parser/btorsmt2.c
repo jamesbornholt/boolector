@@ -3862,6 +3862,7 @@ declare_fun_smt2 (BtorSMT2Parser *parser, bool isconst)
 {
   uint32_t i;
   int32_t tag;
+  bool is_bool_var = false;
   BoolectorSortStack args;
   BtorSMT2Node *fun;
   fun = 0;
@@ -3912,6 +3913,7 @@ declare_fun_smt2 (BtorSMT2Parser *parser, bool isconst)
 
   /* parse return sort */
   tag = read_token_smt2 (parser);
+  is_bool_var = tag == BTOR_BOOL_TAG_SMT2;
   if (!parse_sort (parser, tag, true, &sort))
   {
     BTOR_RELEASE_STACK (args);
@@ -3934,6 +3936,10 @@ declare_fun_smt2 (BtorSMT2Parser *parser, bool isconst)
     else
     {
       fun->exp = boolector_var (parser->btor, sort, fun->name);
+      BtorPtrHashBucket *b =
+          btor_hashptr_table_get (parser->btor->inputs, fun->exp);
+      assert (b);
+      b->data.flag = is_bool_var;
       BTOR_MSG (boolector_get_btor_msg (parser->btor),
                 2,
                 "declared '%s' as bit-vector at line %d column %d",
