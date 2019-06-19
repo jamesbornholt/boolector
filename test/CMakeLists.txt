@@ -40,6 +40,10 @@ add_executable (testbtor ${test_src_files})
 target_link_libraries(testbtor boolector m)
 set_target_properties(testbtor PROPERTIES OUTPUT_NAME test)
 
+if(GMP_FOUND)
+  include_directories(AFTER PRIVATE ${GMP_INCLUDE_DIR})
+endif()
+
 set(units
   add_aigvec
   add_bitvec

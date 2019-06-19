@@ -91,7 +91,7 @@ target_include_directories(boolector PRIVATE ${Btor2Tools_INCLUDE_DIR})
 target_link_libraries(boolector ${Btor2Tools_LIBRARIES})
 
 if(GMP_FOUND)
-  target_include_directories(boolector PRIVATE ${GMP_INCLUDE_DIR})
+  include_directories(AFTER PRIVATE ${GMP_INCLUDE_DIR})
   target_link_libraries(boolector ${GMP_LIBRARIES})
 endif()
 
