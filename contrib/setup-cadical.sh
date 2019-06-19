@@ -5,7 +5,7 @@ source "$(dirname "$0")/setup-utils.sh"
 CADICAL_DIR=${DEPS_DIR}/cadical
 
 # Download and build CaDiCaL
-git clone --depth 1 https://github.com/arminbiere/cadical.git ${CADICAL_DIR}
+git clone --depth 1 https://github.com/jamesbornholt/cadical.git ${CADICAL_DIR}
 cd ${CADICAL_DIR}
 case "$(uname -s)" in
    CYGWIN*|MINGW32*|MSYS*)
